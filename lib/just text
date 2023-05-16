@@ -1,0 +1,13 @@
+
+
+GET https://newsapi.org/v2/top-headlines?country=us&apiKey=538b32eb56744f1fb066a2ab3e8ead93
+
+
+api key = 538b32eb56744f1fb066a2ab3e8ead93
+
+base Url = https://newsapi.org
+method = /v2/top-headlines
+q=?country=us&
+
+
+https://app.quicktype.io/
