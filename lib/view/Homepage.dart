@@ -20,8 +20,8 @@ class Homepage extends StatelessWidget {
             List<Article> data = snapshot.data!;
             return ListView.builder(
               itemCount: data.length,
-              itemBuilder: (context, int index) {
-                return ArticleWidget(article: data[index]);
+              itemBuilder: (context, int i) {
+                return ArticleWidget(article: data[i]);
               },
             );
           } else if (snapshot.hasError) {
