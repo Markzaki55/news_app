@@ -11,3 +11,10 @@ q=?country=us&
 
 
 https://app.quicktype.io/
+
+
+
+flutter_native_splash:
+    color: "#42a5f5"
+    image: news_app-main\lib\assets\24.jpg
+    android_gravity: Fill

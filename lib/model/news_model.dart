@@ -38,7 +38,7 @@ class Article {
     this.description,
     this.url,
     this.urlToImage,
-    required this.publishedAt,
+    //required this.publishedAt,
     this.content,
   });
 
@@ -48,7 +48,7 @@ class Article {
   String? description;
   String? url;
   String? urlToImage;
-  late DateTime publishedAt;
+  //late DateTime publishedAt;
   String? content;
 
   factory Article.fromJson(Map<String, dynamic> json) {
@@ -60,12 +60,14 @@ class Article {
     description: json["description"],
     url: json["url"],
     urlToImage: json["urlToImage"],
-    publishedAt: DateTime.parse(json["publishedAt"]),
+    //publishedAt: DateTime.parse(json["publishedAt"]),
     content: json["content"],
   );
   print('article: $article');
   return article;
 }
+
+  get publishedAt => null;
 
   Map<String, dynamic> toJson() => {
     "source": source?.toJson(),
@@ -74,7 +76,7 @@ class Article {
     "description": description,
     "url": url,
     "urlToImage": urlToImage,
-    "publishedAt": publishedAt.toIso8601String(),
+   // "publishedAt": publishedAt.toIso8601String(),
     "content": content,
   };
 }

@@ -1,28 +1,36 @@
 import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
+import 'package:news_app/model/news_model.dart';
+import 'package:news_app/view/ArticleDetailsScreen%20.dart';
 import 'package:news_app/view/Homepage.dart';
 
-void main(){
-  // ignore: prefer_const_constructors
+void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+     final Article article = Article();
+    
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'News App',
+      
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => HomePage()),
+        GetPage(
+          name: '/article-details',
+          page: () => ArticleDetailsScreen(article: article,),
+          transition: Transition.rightToLeft,
+        ),
+      ],
       theme: ThemeData(
         brightness: Brightness.dark,
-       
-        //colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home:  Homepage(),
     );
   }
 }
-

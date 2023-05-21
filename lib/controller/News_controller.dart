@@ -1,28 +1,33 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+import 'package:news_app/controller/NewsService%20.dart';
 import 'package:news_app/model/news_model.dart';
-
 
 class NewsController extends GetxController {
   var isLoading = true.obs;
-  var articleList = List<Article>.empty(growable: true).obs;
+  var articles = List<Article>.empty(growable: true).obs;
 
-  Future<List<Article>> getDate() async {
+  @override
+  void onInit() {
+    print('fetchiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiig');
+    fetchNews();
+    super.onInit();
+    
+  }
+
+  Future<void> fetchNews() async {
     try {
-      final response = await http.get(Uri.parse(
-          'https://newsapi.org/v2/top-headlines?country=us&apiKey=538b32eb56744f1fb066a2ab3e8ead93'));
-      if (response.statusCode == 200) {
-        final result = articlesFromJson(response.body);
-        print(result);
-        articleList.value = result.articles;
-        return result.articles;
-      } else {
-        throw Exception('Failed to load data');
-      }
+      isLoading(true); // Set isLoading to true before fetching news
+      final newsService = NewsService();
+      print('Before fetching news');
+
+      final result = await newsService.getNews();
+      articles.assignAll(result);
+       print('After fetching news');
+       
     } catch (e) {
-      throw Exception(e.toString());
+      print(e);
+    } finally {
+      isLoading(false); // Set isLoading to false after fetching news
     }
   }
 }
