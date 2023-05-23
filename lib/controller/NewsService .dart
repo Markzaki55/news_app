@@ -5,9 +5,9 @@ import 'dart:convert';
 
 
 class NewsService {
-  Future<List<Article>> getNews() async {
+  Future<List<Article>> getNews(String Cat) async {
     final response = await http.get(Uri.parse(
-        'https://newsapi.org/v2/top-headlines?country=us&apiKey=538b32eb56744f1fb066a2ab3e8ead93'));
+        'https://newsapi.org/v2/top-headlines?country=us&category=$Cat&apiKey=538b32eb56744f1fb066a2ab3e8ead93'));
     if (response.statusCode == 200) {
       final result = jsonDecode(response.body);
       final articles = List<Article>.from(

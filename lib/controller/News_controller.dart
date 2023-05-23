@@ -3,15 +3,15 @@ import 'package:news_app/controller/NewsService%20.dart';
 import 'package:news_app/model/news_model.dart';
 
 class NewsController extends GetxController {
+  var category = 'general'.obs;
   var isLoading = true.obs;
-  var articles = List<Article>.empty(growable: true).obs;
+  var articles = List<Article>.empty(growable: true).obs; 
 
   @override
   void onInit() {
-    print('fetchiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiig');
+    //  print('fetchiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiig');
     fetchNews();
     super.onInit();
-    
   }
 
   Future<void> fetchNews() async {
@@ -20,10 +20,9 @@ class NewsController extends GetxController {
       final newsService = NewsService();
       print('Before fetching news');
 
-      final result = await newsService.getNews();
+      final result = await newsService.getNews(category.value);
       articles.assignAll(result);
-       print('After fetching news');
-       
+      print('After fetching news');
     } catch (e) {
       print(e);
     } finally {

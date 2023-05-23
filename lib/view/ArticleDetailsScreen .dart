@@ -98,7 +98,7 @@ child: Text('Article not found'),
 
 return Scaffold(
   appBar: AppBar(
-    title: Text(article.title ?? ''),
+    title: Text(article.title?? 'A7a'),
   ),
   body: SingleChildScrollView(
     child: Column(

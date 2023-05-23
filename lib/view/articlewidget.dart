@@ -9,50 +9,58 @@ class ArticleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 20,
-      shadowColor: Colors.black,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: InkWell(
-        onTap: () {
-          Get.toNamed('/article-details', arguments: article);
-        },
-        child: Column(
-          children: [
-            Image.network(
-              article.urlToImage ?? '',
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    article.title ?? '',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                   SizedBox(height: 8),
-                Text(
-                  article.description ?? '',
-                  style: TextStyle(
-                    fontSize: 16,
+    // ignore: prefer_const_constructors
+    return Column(
+      children:  [
+         SizedBox(height: 3),
+        Card(
+          elevation: 20,
+          shadowColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: InkWell(
+            onTap: () {
+              Get.toNamed('/article-details', arguments: article);
+            },
+            child: Column(
+              children: [
+                Image.network(
+                  article.urlToImage ?? '',
+                  height: 200,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        article.title ?? '',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                       SizedBox(height: 8),
+                    Text(
+                      article.description ?? '',
+                      style: TextStyle(
+                        fontSize: 16,
+                       ),
                    ),
-               ),
-                ],
-              ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
+          
         ),
-      ),
+      ],
     );
+   
   }
 }
 
