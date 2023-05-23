@@ -28,10 +28,9 @@ class MyApp extends StatelessWidget {
         ),
       ],
       theme: ThemeData(
-       // brightness: Brightness.dark,
         useMaterial3: true,
         
-        colorScheme: ColorScheme.dark(background: Colors.grey ,primary: Colors.red,secondary: Colors.orangeAccent,surfaceTint: Colors.grey[200])
+        colorScheme: ColorScheme.light(background: Colors.white ,primary: Colors.red,secondary: Colors.orangeAccent,surfaceTint: Colors.grey[200])
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:news_app/controller/NewsService%20.dart';
 import 'package:news_app/model/news_model.dart';
 
 class NewsController extends GetxController {
+  var country = 'us'.obs;
   var category = 'general'.obs;
   var isLoading = true.obs;
   var articles = List<Article>.empty(growable: true).obs; 
@@ -20,7 +21,7 @@ class NewsController extends GetxController {
       final newsService = NewsService();
       print('Before fetching news');
 
-      final result = await newsService.getNews(category.value);
+      final result = await newsService.getNews(category.value, country.value);
       articles.assignAll(result);
       print('After fetching news');
     } catch (e) {
