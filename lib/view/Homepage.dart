@@ -35,6 +35,7 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:news_app/const.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:news_app/controller/News_controller.dart';
@@ -47,14 +48,19 @@ import 'package:news_app/model/news_model.dart';
 class HomePage extends StatelessWidget {
   final NewsController _controller = Get.put(NewsController());
   var countryN = 'USA'.obs;
+  
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: Icon(Icons.dark_mode_outlined),
+          elevation: 0.0,
           title: Obx(() => Text('News ${countryN.value}')),
           centerTitle: true,
-          backgroundColor: Colors.purple[900],
+          backgroundColor: constant().backgroundcolor,
+          
           actions: [
                  PopupMenuButton(
                    itemBuilder: (context){
@@ -135,7 +141,8 @@ class HomePage extends StatelessWidget {
         ),
         
         bottomNavigationBar: BotGnav(),
-        body: Center(
+       body: Center(
+        
           child: Obx(() {
             if (_controller.isLoading.value) {
               return CircularProgressIndicator();
@@ -144,7 +151,7 @@ class HomePage extends StatelessWidget {
                 itemCount: _controller.articles.length,
                 itemBuilder: (context, index) {
                   final article = _controller.articles[index];
-                  return ArticleWidget(article: article);
+                  return ArticleWidget(article: article,index: index,);
                 },
               );
             }

@@ -39,6 +39,7 @@ dependencies:
   http:
   intl:
   google_nav_bar:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:

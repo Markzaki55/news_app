@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:news_app/const.dart';
 import 'package:news_app/controller/News_controller.dart';
 
 class BotGnav extends StatelessWidget {
    BotGnav({super.key});
   final NewsController _controller = Get.put(NewsController());
+  
 
   @override
   Widget build(BuildContext context) {
     return  GNav(
-      backgroundColor: Colors.black,
-      color: Colors.white,
-      activeColor: Colors.white,
+      
+      backgroundColor: constant().backgroundcolor,
+      color: Colors.black,
+      activeColor: Colors.black,
       padding: EdgeInsets.all(16),
-      tabBackgroundColor: Colors.deepPurple.shade800,
+      tabBackgroundColor: Colors.deepPurple.shade200,
       gap: 5,
 
 

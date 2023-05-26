@@ -7,6 +7,7 @@ class NewsController extends GetxController {
   var category = 'general'.obs;
   var isLoading = true.obs;
   var articles = List<Article>.empty(growable: true).obs; 
+  RxInt indexD = 2.obs;
 
   @override
   void onInit() {
