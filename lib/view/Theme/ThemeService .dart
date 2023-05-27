@@ -1,82 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:news_app/const.dart';
 
-enum AppTheme {
-  light,
-  dark,
-}
+class ThemeService {
+  final lightTheme = ThemeData(
+    useMaterial3: true,
+    colorScheme: ColorScheme.light(
+        background: Colors.grey.shade300,
+        primary: Colors.black,
+        secondary: Colors.grey.shade300,
+        surfaceTint: Colors.grey[200]),
+  );
 
-class ThemeService extends GetxController {
-  ThemeService() {
-    _loadTheme();
+  final darkTheme = ThemeData(
+    
+    useMaterial3: true,
+    colorScheme: ColorScheme.dark(
+        background: Colors.black,
+        primary: Colors.grey.shade300,
+        secondary: Colors.black,
+        surfaceTint: Colors.grey[200]),
+  );
+
+  final _getStorage = GetStorage();
+
+  final _darkThemeKey = 'isDarkTheme';
+
+  void saveThemeData(bool isDarkMode) {
+    _getStorage.write(_darkThemeKey, isDarkMode);
   }
 
-  Rx<AppTheme> _theme = AppTheme.light.obs;
-
-  AppTheme get theme => _theme.value;
-
-  ColorScheme get colorScheme {
-    switch (_theme.value) {
-      case AppTheme.light:
-        return ColorScheme.light(
-          primary: Colors.blue,
-          primaryContainer: Colors.blue[700],
-          secondary: Colors.orange,
-          secondaryContainer: Colors.orange[700],
-          surface: Colors.white,
-          background: Colors.white,
-          error: Colors.red,
-          onPrimary: Colors.white,
-          onSecondary: Colors.black,
-          onSurface: Colors.black,
-          onBackground: Colors.black,
-          onError: Colors.white,
-        );
-      case AppTheme.dark:
-        return ColorScheme.dark(
-          primary: Colors.grey,
-          primaryContainer: Colors.grey[700],
-          secondary: Colors.greenAccent,
-          secondaryContainer: Colors.greenAccent[700],
-          surface: Colors.grey.shade800,
-          background: Colors.grey.shade900,
-          error: Colors.red,
-          onPrimary: Colors.white,
-          onSecondary: Colors.black,
-          onSurface: Colors.white,
-          onBackground: Colors.white,
-          onError: Colors.white,
-        );
-      default:
-        return ColorScheme.light(
-          primary: Colors.blue,
-          primaryContainer: Colors.blue[700],
-          secondary: Colors.orange,
-          secondaryContainer: Colors.orange[700],
-          surface: Colors.white,
-          background: Colors.white,
-          error: Colors.red,
-          onPrimary: Colors.white,
-          onSecondary: Colors.black,
-          onSurface: Colors.black,
-          onBackground: Colors.black,
-          onError: Colors.white,
-        );
-    }
+  bool isSavedDarkMode() {
+    return _getStorage.read(_darkThemeKey) ?? false;
   }
 
-  void setTheme(AppTheme theme) async {
-    _theme.value = theme;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('theme', _theme.value.toString());
+  ThemeMode getThemeMode() {
+    return isSavedDarkMode() ? ThemeMode.dark : ThemeMode.light;
   }
 
-  Future<void> _loadTheme() async {
-    final prefs = await SharedPreferences.getInstance();
-    final theme = prefs.getString('theme');
-    if (theme !=null) {
-      _theme.value = AppTheme.values.firstWhere((value) => value.toString() == theme);
-    }
+  void changeTheme() {
+    Get.changeThemeMode(isSavedDarkMode() ? ThemeMode.light : ThemeMode.dark);
+
+    saveThemeData(!isSavedDarkMode());
   }
 }

@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:news_app/controller/NewsService%20.dart';
 import 'package:news_app/model/news_model.dart';
 
@@ -8,10 +10,14 @@ class NewsController extends GetxController {
   var isLoading = true.obs;
   var articles = List<Article>.empty(growable: true).obs; 
   RxInt indexD = 2.obs;
+  
+
+  void Togglefav(RxBool isfav) {
+   isfav.value = !isfav.value;
+  }
 
   @override
   void onInit() {
-    //  print('fetchiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiig');
     fetchNews();
     super.onInit();
   }

@@ -13,8 +13,8 @@ class BotGnav extends StatelessWidget {
   Widget build(BuildContext context) {
     return  GNav(
       
-      backgroundColor: constant().backgroundcolor,
-      color: Colors.black,
+      backgroundColor:Theme.of(context).colorScheme.secondary,
+      color: Theme.of(context).colorScheme.primary,
       activeColor: Colors.black,
       padding: EdgeInsets.all(16),
       tabBackgroundColor: Colors.deepPurple.shade200,
@@ -76,3 +76,4 @@ class BotGnav extends StatelessWidget {
     );
   }
 }
+

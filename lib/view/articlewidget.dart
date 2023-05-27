@@ -1,5 +1,3 @@
-
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -7,14 +5,15 @@ import 'package:get/get.dart';
 import 'package:news_app/controller/News_controller.dart';
 import 'package:news_app/model/news_model.dart';
 
+// ignore: must_be_immutable
 class ArticleWidget extends StatelessWidget {
   final Article article;
   final NewsController _controller = Get.put(NewsController());
-  final int index ;
+  final int index;
+  RxBool isfav = false.obs;
 
-   ArticleWidget({Key? key, required this.article, required this.index}) : super(key: key);
-   
-    
+  ArticleWidget({Key? key, required this.article, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +28,7 @@ class ArticleWidget extends StatelessWidget {
     ];
     final color = colors[random.nextInt(colors.length)];
 
-    final gradient = LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [
-        color.withOpacity(0.7),
-        color.withOpacity(0.9),
-      ],
-    );
+    
 
     final placeholderImage = AssetImage('lib/assets/blank.jpg');
     final imageUrl = article.urlToImage ?? '';
@@ -45,7 +37,7 @@ class ArticleWidget extends StatelessWidget {
       children: [
         const SizedBox(height: 3),
         Card(
-         // elevation: 20,
+          // elevation: 20,
           shadowColor: Colors.black,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
@@ -53,23 +45,23 @@ class ArticleWidget extends StatelessWidget {
           color: color,
           child: InkWell(
             onTap: () {
-              _controller.indexD.value= index;
+              _controller.indexD.value = index;
               Get.toNamed('/article-details');
             },
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                gradient: gradient,
               ),
-              child: Column(
-                children: [
-                  ClipRRect(
+              child: Column(children: [
+                Hero(
+                  tag: 'a7a',
+                  child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(25),
                       topRight: Radius.circular(25),
                     ),
-                    child: imageUrl.isNotEmpty
-                        ? Image.network(
+                    child: 
+                    imageUrl.isNotEmpty ? Image.network(
                             imageUrl,
                             height: 200,
                             width: double.infinity,
@@ -82,63 +74,49 @@ class ArticleWidget extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          article.title ?? '',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        article.title ?? '',
+                        style:  TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
-                        const SizedBox(height: 8),
-                        // Text(
-                        //   article.description ?? '',
-                        //   style: const TextStyle(
-                        //     fontSize: 16,
-                        //   ),
-                        // ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'By ${article.author ?? 'Unknown'} | ${article.publishedAt ?? 'Unknown'}',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                          ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'By ${article.author ?? 'Unknown'} | ${article.publishedAt ?? 'Unknown'}',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey[600],
                         ),
-                        const SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton(
-onPressed: () {
-                              Get.toNamed('/article-details',
-                                  arguments: article);
-                            },
-                            child: const Text(
-                              'Read more',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.blue,
-                              ),
-                            ),
-                          ),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(),
                           IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.favorite_border_rounded,
-                              size: 28,
-                            ),
-                          ),
+                            onPressed: () {
+                              _controller.Togglefav(isfav);
+                            },
+                            icon: Obx(() => Icon(
+                                  isfav.value
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                )),
+                          )
                         ],
                       ),
                     ],
                   ),
                 ),
-       ] ),
+              ]),
             ),
           ),
         ),
@@ -146,4 +124,3 @@ onPressed: () {
     );
   }
 }
-
