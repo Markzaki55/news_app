@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:get/get.dart';
-
 Articles articlesFromJson(String str) => Articles.fromJson(json.decode(str));
 
 String articlesToJson(Articles data) => json.encode(data.toJson());

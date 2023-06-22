@@ -216,7 +216,7 @@ class ArticleDetailsScreen extends StatelessWidget {
             Stack(
               children: [
                 Hero(
-                  tag: 'a7a',
+                  tag: 'Hero',
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(32),

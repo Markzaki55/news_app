@@ -54,7 +54,7 @@ class ArticleWidget extends StatelessWidget {
               ),
               child: Column(children: [
                 Hero(
-                  tag: 'a7a',
+                  tag: 'Hero',
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(25),
