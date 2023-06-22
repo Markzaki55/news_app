@@ -30,6 +30,7 @@ class NewsController extends GetxController {
 
       final result = await newsService.getNews(category.value, country.value);
       articles.assignAll(result);
+      // ignore: avoid_print
       print('After fetching news');
     } catch (e) {
       print(e);
